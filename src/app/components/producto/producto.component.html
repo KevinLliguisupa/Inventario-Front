@@ -1,12 +1,161 @@
+<LINK REL=StyleSheet HREF="/Inventario-Front/feane/css/bootstrap.css">
+<LINK REL=StyleSheet HREF="/Inventario-Front/feane/css/font-awesome.min.css">
+<LINK REL=StyleSheet HREF="/Inventario-Front/feane/css/responsive.css">
+<LINK REL=StyleSheet HREF="/Inventario-Front/feane/css/style.css">
+<LINK REL=StyleSheet HREF="/Inventario-Front/feane/css/style.css.map">
+<LINK REL=StyleSheet HREF="/Inventario-Front/feane/css/style.scss">
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
+    <LINK REL=StyleSheet HREF="/Inventario-Front/feane/css/style.scss">
+
 </head>
+
 <body>
-    <h1>Productos</h1>
+
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h1>
+                Productos
+            </h1>
+        </div>
+    </div>
+
+
+    <div class="container" style="margin-top: 70px;">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        Agregar Producto
+                    </div>
+                    <div class="card-body">
+
+                        <!-- Button Create -->
+                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal"
+                            data-target="#createProducto">
+                            Nuevo
+                        </button>
+
+                        <!-- Modal nuevo producto -->
+                        <div class="modal fade" id="createProducto" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Información del Producto</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form [formGroup]="form">
+                                            <div class="form-group">
+                                                <input type="text" name="pro_nombre" formControlName="pro_nombre"
+                                                    placeholder="Nombre del producto" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="pro_descripcion"
+                                                    formControlName="pro_descripcion" placeholder="Descripción"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" name="cat_id" formControlName="cat_id"
+                                                    placeholder="Categoría" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="pro_iva" formControlName="pro_iva"
+                                                    placeholder="IVA" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" name="pro_costo" formControlName="pro_costo"
+                                                    placeholder="Costo" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" name="pro_pvp" formControlName="pro_pvp"
+                                                    placeholder="Precio de venta" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="pro_imagen" formControlName="pro_imagen"
+                                                    placeholder="Imagen" class="form-control">
+                                            </div>
+
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary" (click)="createProducto()"
+                                                    data-dismiss="modal">Crear</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover bg-white">
+                    <thead>
+                        <tr style=>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Iva</th>
+                            <th>Costo</th>
+                            <th>Precio Venta</th>
+                            <th>Imagen</th>
+                            <th>Stock</th>
+                            <th>Categoria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let producto of productos">
+
+                            <td>
+                                {{producto.pro_id}}
+                            </td>
+                            <td>
+                                {{producto.pro_nombre}}
+                            </td>
+                            <td>
+                                {{producto.pro_descripcion}}
+                            </td>
+                            <td>
+                                {{producto.pro_iva}}
+                            </td>
+                            <td>
+                                {{producto.pro_costo}}
+                            </td>
+                            <td>
+                                {{producto.pro_pvp}}
+                            </td>
+                            <td>
+                                <img src="{{producto.pro_imagen}}" width="100" height="70">
+                            </td>
+                            <td>
+                                {{producto.pro_stock}}
+                            </td>
+                            <td>
+                                {{producto.pro_categoria}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
 </body>
-</html>
