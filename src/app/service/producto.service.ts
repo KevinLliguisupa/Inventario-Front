@@ -17,10 +17,15 @@ export class ProductoService {
     return this.http.get(url)
   }
 
-  // public getProductosByName(){
-  //   const url=this.apiUrl+`/productos/nombre/:pro_nombre`
-  //   return this.http.get(url)
-  // }
+  public getProductosById(pro_id:any){
+    const url = '/productos/id/'+pro_id;
+    return this.http.get(url)
+  }
+
+  public getProductosByName(pro_nombre:any){
+    const url=this.apiUrl+`/productos/nombre/`+pro_nombre
+    return this.http.get(url)
+  }
 
   public postCreateProducto(body:any){
     const url=this.apiUrl+`/productos/`
@@ -34,7 +39,7 @@ export class ProductoService {
 
   public deleteProducto(body:any){
     const url=this.apiUrl+`/productos/delete/`
-    return this.http.delete(url,body)
+    return this.http.put(url,body)
   }
 
 
