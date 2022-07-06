@@ -1,1 +1,73 @@
-<p>ajuste works!</p>
+<div class="content-body">
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+            </ol>
+        </div>
+    </div>
+
+<div>
+    <p-table [value]="ajustes" dataKey="name" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem"></th>
+                <th pSortableColumn="ico"></th>
+                <th pSortableColumn="numero">Número de ajuste<p-sortIcon field="numero"></p-sortIcon></th>
+                <th pSortableColumn="fecha">Fecha<p-sortIcon field="fecha"></p-sortIcon></th>
+                <th pSortableColumn="descipcion">Descipción</th>
+                <th pSortableColumn="narticulos">Tot. Art.<p-sortIcon field="narticulos"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ajuste let-expanded="expanded">
+            <tr>
+                <td>
+                    <button type="button" pButton pRipple [pRowToggler]="ajuste" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td><img [src]="'https://cdn-icons-png.flaticon.com/512/5145/5145985.png'"  width="50" class="shadow-4" /></td>
+                <td>{{ajuste.aju_numero}}</td>
+                <td>{{ajuste.aju_fecha}}</td>
+                <td>{{ajuste.aju_descripcion}}</td>
+                <td>{{ajuste.aju_cantidad_ajuste}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-ajuste>
+            <tr>
+                <td colspan="7">
+                    <div class="p-3">
+                        <p-table [value]="ajuste.aju_detalle" dataKey="id">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="id">Id Producto<p-sortIcon field="price"></p-sortIcon></th>
+                                    <!-- <th pSortableColumn="amount">Imagen<p-sortIcon field="amount"></p-sortIcon></th>
+                                    <th pSortableColumn="customer">Nombre Producto<p-sortIcon field="customer"></p-sortIcon></th>
+                                    <th pSortableColumn="status">Categoria <p-sortIcon field="status"></p-sortIcon></th> -->
+                                    <th pSortableColumn="date">Cantidad Modificada<p-sortIcon field="date"></p-sortIcon></th>
+                                    <th style="width: 4rem"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-detalle>
+                                <tr>
+                                    <td>{{detalle.pro_id}}</td>
+                                    <td>{{detalle.aju_det_cantidad}}</td>
+                                    <!-- <td>{{cargarProductoById(detalle.pro_id)}}</td> -->
+                                    <!-- <td>{{order.id}}</td>
+                                        <td>{{order.amount | currency:'USD'}}</td>
+                                        <td><span [class]="'order-badge order-' + order.status.toLowerCase()">{{order.status}}</span></td>
+                                        <td>{{detalle.aju_det_cantidad}}</td>
+                                    <td><p-button type="button" icon="pi pi-search"></p-button></td> -->
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">Este ajuste no ha modificado ningun producto</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -7,6 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { ProductoComponent } from './components/producto/producto.component';
+
+import {TableModule} from 'primeng/table';
+import {PanelModule} from 'primeng/panel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule } from 'primeng/calendar';
 import { AjusteComponent } from './components/ajuste/ajuste.component';
 
 @NgModule({
@@ -21,7 +26,11 @@ import { AjusteComponent } from './components/ajuste/ajuste.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule,
+    PanelModule,
+    BrowserAnimationsModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
