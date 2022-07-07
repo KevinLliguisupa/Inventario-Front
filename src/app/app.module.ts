@@ -8,6 +8,16 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { AjusteComponent } from './components/ajuste/ajuste.component';
+//////////////////////////
+
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import {TableModule} from 'primeng/table';
+import {PanelModule} from 'primeng/panel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {CardModule} from 'primeng/card';
+import {DataViewModule} from 'primeng/dataview';
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -21,7 +31,12 @@ import { AjusteComponent } from './components/ajuste/ajuste.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+   // 
+  TableModule,PanelModule,BrowserAnimationsModule,CardModule,DataViewModule,PaginatorModule
+    //////////////,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

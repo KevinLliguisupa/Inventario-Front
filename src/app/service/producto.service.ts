@@ -23,7 +23,7 @@ export class ProductoService {
   }
 
   public getProductosByName(pro_nombre:any){
-    const url=this.apiUrl+`/productos/nombre/`+pro_nombre
+    const url=this.apiUrl+`/productos/nombre/`+pro_nombre;
     return this.http.get(url)
   }
 

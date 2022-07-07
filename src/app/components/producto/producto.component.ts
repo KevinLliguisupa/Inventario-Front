@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductoService } from 'src/app/service/producto.service';
 import { ModelProducto } from 'src/app/model/producto.model';
-
-
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
@@ -125,18 +123,64 @@ export class ProductoComponent implements OnInit {
       console.log('Producto editado correctamente.')
       this.form.reset();
       this.cargarProductos()
-      
+
     }
     );
   }
 
+  // Swal.fire({
+  //   title: '¿Está seguro de borrar?',
+  //   text: "No podrá revertir esta acción!",
+  //   icon: 'question',
+  //   showCancelButton: true,
+  //   confirmButtonColor: '#91C788',
+  //   cancelButtonColor: '#FFAAA7',  
+  //   confirmButtonText: 'Si, deseo eliminar!',
+  //   cancelButtonText: 'Cancelar'
+  // }).then((result) => {
+  //   if (result.isConfirmed) {
+  //     this.categoriaService.deleteCat({
+  //       cat_id: cat_id
+  //     }).subscribe(res => {
+  //       console.log('Categoria eliminada correctamente.')
+  //       this.form.reset();
+  //       this.cargarCategorias()
+  //     })
+
+  //     Swal.fire(
+  //       'Eliminada!',
+  //       'La categoría ha sido eliminada.',
+  //       'success'
+  //     )
+  //   }
+  // })
+
   public borrarProducto(pro_id: any) {
-    this.productoService.deleteProducto({
-      pro_id: pro_id
-    }).subscribe(res => {
-      console.log('Producto eliminado correctamente.')
-      this.form.reset();
-      this.cargarProductos()
+    Swal.fire({
+      title: '¿Está seguro de borrar?',
+      text: "No podrá revertir esta acción!",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#91C788',
+      cancelButtonColor: '#FFAAA7',
+      confirmButtonText: 'Si, deseo eliminar!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productoService.deleteProducto({
+          pro_id: pro_id
+        }).subscribe(res => {
+          console.log('Producto eliminado correctamente.')
+          this.form.reset();
+          this.cargarProductos()
+        })
+
+        Swal.fire(
+          'Eliminada!',
+          'La categoría ha sido eliminada.',
+          'success'
+        )
+      }
     })
   }
 
