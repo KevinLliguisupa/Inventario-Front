@@ -29,7 +29,8 @@ export class AjusteComponent implements OnInit {
             suma+=Math.abs(parseInt(ajuste[index].aju_detalle[j].aju_det_cantidad))            
           }
           ajuste[index].aju_cantidad_ajuste=suma
-
+          let fecha=new Date(ajuste[index].aju_fecha)
+          ajuste[index].aju_fecha=fecha.toLocaleDateString('es-es', { weekday:"short", year:"numeric", month:"long", day:"numeric"})
         }
         this.ajustes = ajuste
         console.log(this.ajustes)

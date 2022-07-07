@@ -9,5 +9,6 @@ export interface ModelProducto {
     pro_pvp: number,
     pro_imagen: string,
     pro_stock: number,
-    pro_categoria: ModelCategoria
+    pro_categoria: ModelCategoria,
+    aju_det_cantidad:number
 }

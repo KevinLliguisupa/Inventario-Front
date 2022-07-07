@@ -1,0 +1,147 @@
+<div class="content-body">
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="m-t-30 text-center">
+                <h2>Creacion de ajuste</h2>
+                <br>
+            </div>
+            <form [formGroup]="form">
+                <section>
+                    <div class="card">
+                        <div>
+                            <h3 class="m-t-30">Información del Ajuste</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div>
+                                        <h4 class="box-title m-t-30">Número: {{numAjuste}}</h4>
+                                        <br>
+                                    </div>
+                                    <h5 class="box-title m-t-30">Descripción:</h5>
+
+                                    <div class="form-group">
+                                        <textarea rows="8" cols="70" formControlName="formDescrip"
+                                            pInputTextarea></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <h3 class="box-title m-t-30">Fecha</h3>
+                                        <div class="col-md-16">
+                                            <p-calendar formControlName="formFecha" [inline]="true" di
+                                                onselect="seleccionarFecha()">
+                                            </p-calendar>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <section>
+                    <div class="card">
+                        <div>
+                            <h3 class="m-t-30 ">Selección de productos</h3>
+                        </div>
+
+                        <div class="card-body">
+
+                            <p-pickList [source]="productos" [target]="productosSelected" sourceHeader="Disponibles"
+                                targetHeader="Seleccionados" [dragdrop]="true" [responsive]="true"
+                                [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name"
+                                sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
+                                <ng-template let-producto pTemplate="item">
+                                    <div class="product-item">
+                                        <div class="image-container">
+                                            <img src="{{producto.pro_imagen}}" [alt]="producto.pro_nombre"
+                                                class="product-image" width="75px" />
+                                        </div>
+                                        <div class="product-list-detail">
+                                            <h5 class="mb-2">{{producto.pro_nombre}}</h5>
+                                            <i class="pi pi-tag product-category-icon"></i>
+                                            <span class="product-category">{{producto.pro_categoria.cat_nombre}}</span>
+                                        </div>
+                                        <div class="product-list-action">
+                                            <h6 class="mb-2">${{producto.pro_pvp}}</h6>
+                                            <span [class]="'product-badge status-instock'">{{producto.pro_stock}}
+                                                disp.</span>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-pickList>
+
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <section>
+                    <div class="card">
+                        <div>
+                            <h3 class="m-t-30">Cantidades a modificar</h3>
+                        </div>
+
+                        <div class="card-body">
+
+                            <p-table [value]="productosSelected" responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                        <th>PVP</th>
+                                        <th>IVA</th>
+                                        <th>Stock</th>
+                                        <th>Cant modi</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-producto>
+                                    <tr>
+                                        <td>{{producto.pro_id}}</td>
+                                        <td>{{producto.pro_nombre}}</td>
+                                        <td>{{producto.pro_pvp}}</td>
+                                        <td>
+                                            <input type="checkbox" name="" id="" checked="{{producto.pro_iva}}">
+
+                                        </td>
+                                        <td>{{producto.pro_stock}}</td>
+                                        <td>
+                                            <input type="text" pInputText [(ngModel)]="producto.aju_det_cantidad"
+                                                formControlName="formCantidad">
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                        <br>
+
+                        <button pButton pRipple type="button" label="Success" class="p-button-success"
+                            (click)="crearAjuste()"></button>
+
+                        <!-- <p-button (click)="confirmPosition('top')" icon="pi pi-arrow-down" label="Top"
+                            styleClass="p-button-warning mr-2"></p-button> -->
+                    </div>
+
+                </section>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
