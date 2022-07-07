@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModelCategoria } from 'src/app/model/categoria.model'; 
 import { CategoriaService } from 'src/app/service/categoria.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categoria',
@@ -72,12 +73,31 @@ export class CategoriaComponent implements OnInit {
   }
 
   public borrarCategoria(cat_id: any) {
-    this.categoriaService.deleteCat({
-      cat_id: cat_id
-    }).subscribe(res => {
-      console.log('Categoria eliminada correctamente.')
-      this.form.reset();
-      this.cargarCategorias()
+    Swal.fire({
+      title: '¿Está seguro de borrar?',
+      text: "No podrá revertir esta acción!",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#91C788',
+      cancelButtonColor: '#FFAAA7',  
+      confirmButtonText: 'Si, deseo eliminar!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoriaService.deleteCat({
+          cat_id: cat_id
+        }).subscribe(res => {
+          console.log('Categoria eliminada correctamente.')
+          this.form.reset();
+          this.cargarCategorias()
+        })
+
+        Swal.fire(
+          'Eliminada!',
+          'La categoría ha sido eliminada.',
+          'success'
+        )
+      }
     })
   }
 
