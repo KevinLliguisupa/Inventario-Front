@@ -28,4 +28,9 @@ export class AjusteService {
     const url=this.apiUrl+`/ajustes/completo/`
     return this.http.post(url,body)
   }
+  
+  public putUpdateAjuste(body:any){
+    const url=this.apiUrl+`/ajustes/`
+    return this.http.put(url,body)
+  }
 }

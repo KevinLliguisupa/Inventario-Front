@@ -16,6 +16,15 @@
         </div>
     </p-card>
 
+
+
+<div>
+    <br>
+    <a href="ajustes/create"><button pButton pRipple type="button" label="Nuevo Ajuste"
+        class="p-button-secondary"></button></a>
+        <br>
+</div>
+
     <div>
         <p-table [value]="ajustes" dataKey="name" responsiveLayout="scroll">
             <ng-template pTemplate="header">
@@ -27,8 +36,8 @@
                     <th pSortableColumn="fecha">Fecha<p-sortIcon field="fecha"></p-sortIcon>
                     </th>
                     <th pSortableColumn="descipcion">Descipción</th>
-                    <th pSortableColumn="narticulos">Tot. Art.<p-sortIcon field="narticulos"></p-sortIcon>
-                    </th>
+                    <th pSortableColumn="narticulos">Tot. Art.<p-sortIcon field="narticulos"></p-sortIcon>/th>
+                    <th pSortableColumn="operaciones">Operaciones</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-ajuste let-expanded="expanded">
@@ -44,6 +53,52 @@
                     <td>{{ajuste.aju_fecha}}</td>
                     <td>{{ajuste.aju_descripcion}}</td>
                     <td>{{ajuste.aju_cantidad_ajuste}}</td>
+                    <td>
+
+
+                        <a class="btn btn-success" data-toggle="modal" data-target="#editarPizza"
+                            (click)="infoUpdateAjuste(ajuste)">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <div class="modal fade" id="editarPizza" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Editar Pizza</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form [formGroup]="form">
+                                            <div class="form-group">
+                                                <label>
+                                                    <h6>Id Pizza:{{informacionPizza.aju_numero}}</h6>
+                                                </label>
+                                                <input type="text" name="Nombre Pizza" formControlName="fromDescrip"
+                                                    placeholder="{{informacionPizza.aju_descripcion}}"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="Origen Pizza" formControlName="formFecha"
+                                                    placeholder="{{informacionPizza.aju_fecha}}" class="form-control">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="actualizarPizza(informacionPizza.aju_numero)"
+                                                    data-dismiss="modal">Actualizar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="rowexpansion" let-ajuste>
