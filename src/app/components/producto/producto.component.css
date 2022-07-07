@@ -30,12 +30,9 @@ body {
   padding-bottom: 90px;
 }
 
-h1,
-h2 {
-  font-family: 'Dancing Script', cursive;
-}
 
-.heading_container {
+
+/* .heading_container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -57,7 +54,7 @@ h2 {
 
 .heading_container h2 span {
   color: #ffbe33;
-}
+} */
 
 .heading_container p {
   margin-top: 10px;

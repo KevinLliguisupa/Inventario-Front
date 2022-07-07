@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { CreateAjusteComponent } from './components/create-ajuste/create-ajuste.component';
@@ -18,7 +18,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {PickListModule} from 'primeng/picklist';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     InputTextareaModule,
     PickListModule,
     CheckboxModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
