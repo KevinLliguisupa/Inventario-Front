@@ -92,10 +92,11 @@ export class ProductoComponent implements OnInit {
   }
 
 
-  public mostrarIdCategoria(categoria:any): number{
+  public mostrarIdCategoria(categoria:String): number{
 
     let id = 0
     // recorremos la lista categorias
+    console.log(this.categorias.length)
     for (let index = 0; index < this.categorias.length; index++) {
        // si la categoria del componente select esta en la lista de categorias
       if(this.categorias[index].cat_nombre == categoria){
@@ -105,7 +106,6 @@ export class ProductoComponent implements OnInit {
       
     }
     console.log(categoria)
-    console.log(id)
 
     return id
    
@@ -138,11 +138,18 @@ export class ProductoComponent implements OnInit {
   }
 
   public crearProducto() {
+    let iva = true;
    
     console.log(this.form.value.pro_nombre)
     console.log(this.form.value.pro_descripcion)
     console.log(this.mostrarIdCategoria(this.form.value.cat_nombre))
-    console.log(this.form.value.pro_iva)
+    console.log("Iva")
+
+    if (this.form.value.pro_iva == null) {
+      iva = false
+    }
+    console.log()
+    console.log("Iva---------")
     console.log(this.form.value.pro_costo)
     console.log(this.form.value.pro_pvp)
     console.log(this.form.value.pro_imagen)
@@ -151,7 +158,7 @@ export class ProductoComponent implements OnInit {
       pro_nombre: this.form.value.pro_nombre,
       pro_descripcion: this.form.value.pro_descripcion,
       cat_id: this.mostrarIdCategoria(this.form.value.cat_nombre),
-      pro_iva: this.form.value.pro_iva,
+      pro_iva: iva,
       pro_costo: this.form.value.pro_costo,
       pro_pvp: this.form.value.pro_pvp,
       pro_imagen: this.form.value.pro_imagen
@@ -250,6 +257,8 @@ export class ProductoComponent implements OnInit {
 
 
   infoProducto2(producto: any){
+
+     console.log(producto.pro_categoria.cat_nombre)
    
       this.form.controls['pro_id'].disable()
       this.id_producto = producto.pro_id
