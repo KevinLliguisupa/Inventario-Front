@@ -11,20 +11,26 @@ import { AjusteComponent } from './components/ajuste/ajuste.component';
 //////////////////////////
 
 import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
+//import { MessageService } from 'primeng/api';
 import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {ToolbarModule} from 'primeng/toolbar';
 import {PanelModule} from 'primeng/panel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CardModule} from 'primeng/card';
 import {DataViewModule} from 'primeng/dataview';
 import {PaginatorModule} from 'primeng/paginator';
+import { FiltroproductoPipe } from './pipes/filtroproducto.pipe';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoriaComponent,
     ProductoComponent,
-    AjusteComponent
+    AjusteComponent,
+    FiltroproductoPipe,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +38,13 @@ import {PaginatorModule} from 'primeng/paginator';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastModule,
+    ToolbarModule,
+    ConfirmDialogModule,
+    DialogModule,
 
    // 
-  TableModule,PanelModule,BrowserAnimationsModule,CardModule,DataViewModule,PaginatorModule
+  TableModule,PanelModule,BrowserAnimationsModule,CardModule,DataViewModule,PaginatorModule,
     //////////////,
 
   ],
