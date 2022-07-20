@@ -1,32 +1,30 @@
 <div class="content-body">
     <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-            </ol>
-        </div>
-    </div>
 
-    <p-card>
-        <div class="heading_container" style=" background-color: #4C4C6D; height: 130px;">
-            <h2 style="text-align: center; padding-top: 30px; color: white;font-style:italic;font-size: 55px;">
-                Ajustes
-            </h2>
-        </div>
-    </p-card>
+        <p-card>
+            <div class="heading_container heading_center"
+                style="background-color: #4C4C6D; height: 150px;padding-top:2px;">
+                <h2 style="text-align: center; padding-top: 37px; color: white;font-style:italic;font-size: 55px;">
+                    Ajustes
+                </h2>
+            </div>
+        </p-card>
+        <div><br></div>
 
+        <p-toolbar styleClass="mb-4">
+            <ng-template pTemplate="left">
+                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-success"
+                    label="Nuevo Ajuste" [routerLink]="['/ajustes/create']"></button>
 
+            </ng-template>
+        </p-toolbar>
+        <p-table [value]="ajustes" dataKey="aju_numero" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+                    <h5 class="m-0">Administrar Ajustes</h5>
 
-<div>
-    <br>
-    <a href="ajustes/create"><button pButton pRipple type="button" label="Nuevo Ajuste"
-        class="p-button-secondary"></button></a>
-        <br>
-</div>
-
-    <div>
-        <p-table [value]="ajustes" dataKey="name" responsiveLayout="scroll">
+                </div>
+            </ng-template>
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width: 3rem"></th>
@@ -36,8 +34,10 @@
                     <th pSortableColumn="fecha">Fecha<p-sortIcon field="fecha"></p-sortIcon>
                     </th>
                     <th pSortableColumn="descipcion">Descipción</th>
-                    <th pSortableColumn="narticulos">Tot. Art.<p-sortIcon field="narticulos"></p-sortIcon>/th>
-                    <th pSortableColumn="operaciones">Operaciones</th>
+                    <th pSortableColumn="estado">Estado</th>
+                    <!-- <th pSortableColumn="narticulos">Tot. Art.<p-sortIcon field="narticulos"></p-sortIcon>
+                        </th> -->
+                    <th>Opciones</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-ajuste let-expanded="expanded">
@@ -52,52 +52,20 @@
                     <td>{{ajuste.aju_numero}}</td>
                     <td>{{ajuste.aju_fecha}}</td>
                     <td>{{ajuste.aju_descripcion}}</td>
-                    <td>{{ajuste.aju_cantidad_ajuste}}</td>
+                    <td>{{ajuste.aju_estado_etiqueta}}</td>
+                    <!-- <td>{{ajuste.aju_cantidad_ajuste}}</td> -->
                     <td>
 
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info"
+                            [routerLink]="['/ajustes/update/',ajuste.aju_numero]"
+                            style="height: 2.5rem; width: 2.5rem;"></button>
+                        <button pButton pRipple type="button" icon="pi pi-print"
+                            class="p-button-rounded p-button-warning" style="height: 2.5rem; width: 2.5rem;"
+                            (click)="exportPdf(ajuste)"></button>
 
-                        <a class="btn btn-success" data-toggle="modal" data-target="#editarPizza"
-                            (click)="infoUpdateAjuste(ajuste)">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <div class="modal fade" id="editarPizza" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Editar Pizza</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form [formGroup]="form">
-                                            <div class="form-group">
-                                                <label>
-                                                    <h6>Id Pizza:{{informacionPizza.aju_numero}}</h6>
-                                                </label>
-                                                <input type="text" name="Nombre Pizza" formControlName="fromDescrip"
-                                                    placeholder="{{informacionPizza.aju_descripcion}}"
-                                                    class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" name="Origen Pizza" formControlName="formFecha"
-                                                    placeholder="{{informacionPizza.aju_fecha}}" class="form-control">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Cerrar</button>
-                                                <button type="button" class="btn btn-primary"
-                                                    (click)="actualizarPizza(informacionPizza.aju_numero)"
-                                                    data-dismiss="modal">Actualizar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
+                        <button pButton pRipple type="button" icon="pi pi-power-off"
+                            class="p-button-rounded p-button-danger" style="height: 2.5rem; width: 2.5rem;"
+                            (click)="cambiarEstado(ajuste)"></button>
                     </td>
                 </tr>
             </ng-template>
@@ -110,9 +78,8 @@
                 <tr>
                     <th pSortableColumn="id">Id Producto<p-sortIcon field="price"></p-sortIcon>
                     </th>
-                    <!-- <th pSortableColumn="amount">Imagen<p-sortIcon field="amount"></p-sortIcon></th>
-                                    <th pSortableColumn="customer">Nombre Producto<p-sortIcon field="customer"></p-sortIcon></th>
-                                    <th pSortableColumn="status">Categoria <p-sortIcon field="status"></p-sortIcon></th> -->
+                    <th pSortableColumn="pronom">Nombre Producto<p-sortIcon field="pronom"></p-sortIcon>
+                    </th>
                     <th pSortableColumn="date">Cantidad Modificada<p-sortIcon field="date"></p-sortIcon>
                     </th>
                     <th style="width: 4rem"></th>
@@ -121,13 +88,8 @@
             <ng-template pTemplate="body" let-detalle>
                 <tr>
                     <td>{{detalle.pro_id}}</td>
+                    <td>{{detalle.producto.pro_nombre}}</td>
                     <td>{{detalle.aju_det_cantidad}}</td>
-                    <!-- <td>{{cargarProductoById(detalle.pro_id)}}</td> -->
-                    <!-- <td>{{order.id}}</td>
-                                        <td>{{order.amount | currency:'USD'}}</td>
-                                        <td><span [class]="'order-badge order-' + order.status.toLowerCase()">{{order.status}}</span></td>
-                                        <td>{{detalle.aju_det_cantidad}}</td>
-                                    <td><p-button type="button" icon="pi pi-search"></p-button></td> -->
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
