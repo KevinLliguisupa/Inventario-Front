@@ -15,4 +15,21 @@ export class CategoriaService {
     const url=this.apiUrl+`/categorias`
     return this.http.get(url)
   }
+
+  public postCreateCat(body:any){
+    const url=this.apiUrl+`/categorias/`
+    return this.http.post(url,body)
+  }
+
+  public putUpdateCat(body:any){
+    const url=this.apiUrl+`/categorias/`
+    return this.http.put(url,body)
+
+  }
+  public deleteCat(body:any){
+    const url=this.apiUrl+`/categorias/delete/`
+    return this.http.put(url,body)
+
+  }
+
 }
