@@ -1,121 +1,210 @@
 <div class="content-body">
     <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-            </ol>
-        </div>
-    </div>
-    <p-card>
-        <div class="heading_container" style=" background-color: #4C4C6D; height: 130px;">
-            <h2 style="text-align: center; padding-top: 30px; color: white;font-style:italic;font-size: 55px;">
-                Productos
-            </h2>
-        </div>
-    </p-card>
 
-
-
-    <div class="container" style="margin-top: 70px, background-attachment;">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header">
-                        Agregar Producto
-                    </div>
-
-                    <div class="card-body">
-
-                        <!-- Button Create -->
-                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal"
-                            data-target="#crearProducto">
-                            Nuevo
+        <p-card>
+            <div class="heading_container heading_center"
+                style="background-color: #4C4C6D; height: 150px;padding-top:2px;">
+                <h2 style="text-align: center; padding-top: 37px; color: white;font-style:italic;font-size: 55px;">
+                    Productos
+                </h2>
+            </div>
+        </p-card>
+        <div><br></div>
+        <!-- Modal nuevo producto -->
+        <div class="modal fade" id="crearProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Información del Producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
-
-                        <!-- Modal nuevo producto -->
-                        <div class="modal fade" id="crearProducto" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Información del Producto</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form [formGroup]="form">
-                                            <div class="form-group">
-                                                <input type="text" name="pro_nombre" formControlName="pro_nombre"
-                                                    placeholder="Nombre del producto" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" name="pro_descripcion"
-                                                    formControlName="pro_descripcion" placeholder="Descripción"
-                                                    class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="number" name="cat_id" formControlName="cat_id"
-                                                    placeholder="Categoría" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" name="pro_iva" formControlName="pro_iva"
-                                                    placeholder="IVA" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="number" name="pro_costo" formControlName="pro_costo"
-                                                    placeholder="Costo" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="number" name="pro_pvp" formControlName="pro_pvp"
-                                                    placeholder="Precio de venta" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" name="pro_imagen" formControlName="pro_imagen"
-                                                    placeholder="Imagen" class="form-control">
-                                            </div>
-
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Cerrar</button>
-                                                <button type="button" class="btn btn-primary" (click)="crearProducto()"
-                                                    data-dismiss="modal">Crear</button>
-                                            </div>
-                                        </form>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="form">
+                            <div class="form-group">
+                                <input type="text" name="pro_nombre" formControlName="pro_nombre"
+                                    placeholder="Nombre del producto" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="pro_descripcion" formControlName="pro_descripcion"
+                                    placeholder="Descripción" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <select name="cat_nombre" formControlName="cat_nombre" class="form-control">
+                                    <option *ngFor="let categoria of categorias" value="{{categoria.cat_nombre}}">
+                                        {{categoria.cat_nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <Label style="padding-right: 10px;">Iva</Label>
+                                        <input type="checkbox" name="pro_iva"
+                                            formControlName="pro_iva" placeholder="IVA" >
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <input type="number" name="pro_costo" formControlName="pro_costo" placeholder="Costo"
+                                    class="form-control" min="0" step="0.05">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" name="pro_pvp" formControlName="pro_pvp"
+                                    placeholder="Precio de venta" class="form-control" min="0" step="0.05">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="pro_imagen" formControlName="pro_imagen" placeholder="Imagen"
+                                    class="form-control">
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" (click)="crearProducto()"
+                                    data-dismiss="modal">Crear</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-12">
-                <br>
+        <div class="modal fade" id="actualizarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form [formGroup]="form">
+                            <div class="form-group">
+
+                                <div class="form-group">
+                                    <input type="text" name="pro_id" formControlName="pro_id" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" name="pro_nombre" formControlName="pro_nombre"
+                                        class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" name="pro_descripcion" formControlName="pro_descripcion"
+                                        class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <select name="cat_nombre" formControlName="cat_nombre" class="form-control">
+                                        <option *ngFor="let categoria of categorias" value="{{categoria.cat_nombre}}">
+                                            {{categoria.cat_nombre}}</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px;">Iva</Label>
+                                            <input type="checkbox" name="pro_iva"
+                                                formControlName="pro_iva" placeholder="IVA" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" name="pro_costo" formControlName="pro_costo"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" name="pro_pvp" formControlName="pro_pvp" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="pro_imagen" formControlName="pro_imagen"
+                                        class="form-control">
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" (click)="actualizarProducto()"
+                                        data-dismiss="modal">Actualizar</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
             </div>
-            <div class="col-md-12">
-                <table class="table table-bordered table-hover bg-white">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Iva</th>
-                            <th>Costo</th>
-                            <th>Precio Venta</th>
-                            <th>Imagen</th>
-                            <th>Stock</th>
-                            <th>Categoria</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let producto of productos">
+        </div>
 
-                            <td>
-                                {{producto.pro_id}}
-                            </td>
+
+        <div class="content-section implementation">
+            <p-toast></p-toast>
+
+            <div class="card">
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2"
+                            data-toggle="modal" data-target="#crearProducto" (click)="crearProducto()"></button>
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [rows]="5" [value]="productos" [paginator]="true" responsiveLayout="scroll"
+                    [rowHover]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" [globalFilterFields]="['pro_nombre']">
+                    <ng-template pTemplate="caption">
+                        <div class="flex align-items-center justify-content-between">
+                            <h5 class="m-0">Administrar Productos</h5>
+
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+
+                            <th pSortableColumn="pro_id">Id<p-sortIcon field="pro_id"></p-sortIcon>
+                                <div class="flex justify-content-center align-items-center">
+                                    <p-columnFilter type="text" field="pro_id" display="pro_id"></p-columnFilter>
+                                </div>
+
+                            </th>
+                            <th pSortableColumn="pro_nombre">Nombre<p-sortIcon field="pro_nombre"></p-sortIcon>
+                                <div class="flex justify-content-center align-items-center">
+                                    <p-columnFilter type="text" field="pro_nombre" display="pro_nombre">
+                                    </p-columnFilter>
+                                </div>
+                            </th>
+                            <th pSortableColumn="pro_descripcion">Descripción<p-sortIcon field="pro_descripcion">
+                                </p-sortIcon>
+                            </th>
+                            <th style="width: 10%;">Iva</th>
+                            <th pSortableColumn="pro_costo">Costo <p-sortIcon field="pro_costo"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="pro_pvp">Precio <p-sortIcon field="pro_pvp"></p-sortIcon>
+                            </th>
+                            <th>Imagen</th>
+                            <th pSortableColumn="pro_stock">Stock <p-sortIcon field="pro_stock"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="pro_categoria.cat_nombre">Categoría <p-sortIcon
+                                    field="pro_categoria.cat_nombre"></p-sortIcon>
+                                <div class="flex justify-content-center align-items-center">
+                                    <p-columnFilter type="text" field="pro_categoria.cat_nombre"
+                                        display="pro_categoria.cat_nombre"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+
+                    </ng-template>
+                    <ng-template pTemplate="body" let-producto>
+                        <tr>
+
+                            <td>{{producto.pro_id}}</td>
                             <td>
                                 {{producto.pro_nombre}}
                             </td>
@@ -123,16 +212,16 @@
                                 {{producto.pro_descripcion}}
                             </td>
                             <td>
-                                {{producto.pro_iva}}
+                                {{cambiarIva(producto.pro_iva)}}
                             </td>
                             <td>
                                 {{producto.pro_costo}}
                             </td>
+
+                            <td>{{producto.pro_pvp}}</td>
                             <td>
-                                {{producto.pro_pvp}}
-                            </td>
-                            <td>
-                                <img src="{{producto.pro_imagen}}" width="100" height="70">
+
+                                <img src="{{producto.pro_imagen}}" width="80" >
                             </td>
                             <td>
                                 {{producto.pro_stock}}
@@ -140,106 +229,60 @@
                             <td>
                                 {{producto.pro_categoria.cat_nombre}}
                             </td>
-
-                            <td class="d-flex-justify-content-center">
-                                <a class="btn btn-danger" (click)="borrarProducto(producto.pro_id)">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                                <a class="btn btn-success" data-toggle="modal" data-target="#actualizarProducto"
-                                    (click)='infoUpdateProducto(producto.pro_id, producto.pro_nombre, producto.pro_descripcion,
-                                    producto.pro_categoria.cat_id,producto.pro_iva,producto.pro_costo,producto.pro_pvp,producto.pro_imagen)'>
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <div class="modal fade" id="actualizarProducto" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Cerrar">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-
-                                            <div class="modal-body">
-                                                <form [formGroup]="form">
-                                                    <div class="form-group">
-                                                        <label>
-                                                            <h6>Id Producto: {{informacionProducto.pro_id}}</h6>
-                                                        </label>
-                                                        <div class="form-group">
-                                                            <input type="text" name="pro_nombre"
-                                                                formControlName="pro_nombre"
-                                                                placeholder="{{informacionProducto.pro_nombre}}"
-                                                                class="form-control"
-                                                                value="{{informacionProducto.pro_nombre}}">
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <input type="text" name="pro_descripcion"
-                                                                formControlName="pro_descripcion"
-                                                                placeholder="{{informacionProducto.pro_descripcion}}"
-                                                                class="form-control"
-                                                                value="{{informacionProducto.pro_descripcion}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="number" name="cat_id" formControlName="cat_id"
-                                                                placeholder="{{informacionProducto.cat_id}}"
-                                                                class="form-control"
-                                                                value="{{informacionProducto.cat_id}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" name="pro_iva" formControlName="pro_iva"
-                                                                placeholder="{{informacionProducto.pro_iva}}"
-                                                                class="form-control"
-                                                                value="{{informacionProducto.pro_iva}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="number" name="pro_costo"
-                                                                formControlName="pro_costo"
-                                                                placeholder="{{informacionProducto.pro_costo}}"
-                                                                class="form-control"
-                                                                value="{{informacionProducto.pro_costo}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="number" name="pro_pvp"
-                                                                formControlName="pro_pvp"
-                                                                placeholder="{{informacionProducto.pro_pvp}}"
-                                                                class="form-control"
-                                                                value="{{informacionProducto.pro_pvp}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" name="pro_imagen"
-                                                                formControlName="pro_imagen"
-                                                                placeholder="{{informacionProducto.pro_imagen}}"
-                                                                class="form-control"
-                                                                value="{{informacionProducto.pro_imagen}}">
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Cerrar</button>
-                                                            <button type="button" class="btn btn-primary"
-                                                                (click)="actualizarProducto(informacionProducto.pro_id)"
-                                                                data-dismiss="modal">Actualizar</button>
-                                                        </div>
-
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2" data-toggle="modal"
+                                    data-target="#actualizarProducto" (click)="infoProducto2(producto)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                    (click)="borrarProducto(producto.pro_id)"></button>
                             </td>
-
                         </tr>
-                    </tbody>
-                </table>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="flex align-items-center justify-content-between">
 
+                        </div>
+                    </ng-template>
+                </p-table>
             </div>
 
+            <p-dialog [style]="{width: '450px'}" header="Detalles del producto" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <div class="field">
+                        <label for="name">Nombre</label>
+                        <input type="text" pInputText id="pro_nombre" required autofocus />
+                        <small class="p-error">Ingrese un nombre.</small>
+                    </div>
+                    <div class="field">
+                        <label for="description">Descripción</label>
+                        <textarea id="pro_descripcion" pInputTextarea required rows="3" cols="20"></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="name">Iva</label>
+                        <input type="text" pInputText id="pro_iva" required autofocus />
+                        <small class="p-error">Ingrese un nombre.</small>
+                    </div>
+                    <div class="formgrid grid">
+                        <div class="field col">
+                            <label for="pro_costo">Costo</label>
+                            <p-inputNumber id="pro_costo"></p-inputNumber>
+                        </div>
+                        <div class="field col">
+                            <label for="pro_pvp">Precio</label>
+                            <p-inputNumber id="pro_pvp"></p-inputNumber>
+                        </div>
+                    </div>
 
+                    <img [src]="">
+
+
+                </ng-template>
+
+
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
         </div>
+
     </div>
 </div>

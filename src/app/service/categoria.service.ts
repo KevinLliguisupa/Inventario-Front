@@ -6,8 +6,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http'
 })
 export class CategoriaService {
 
-  // apiUrl:string="https://api-modulo-inventario.herokuapp.com"
+  //apiUrl:string="https://api-modulo-inventario.herokuapp.com"
   apiUrl:string="http://localhost:4000"
+
   constructor(private http:HttpClient) { }
   
   public getCategorias(){

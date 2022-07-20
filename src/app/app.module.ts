@@ -9,8 +9,15 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { CreateAjusteComponent } from './components/create-ajuste/create-ajuste.component';
 import { AjusteComponent } from './components/ajuste/ajuste.component';
+//////////////////////////
 
 import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {ToolbarModule} from 'primeng/toolbar';
+import {DataViewModule} from 'primeng/dataview';
+import {PaginatorModule} from 'primeng/paginator';
+import { FiltroproductoPipe } from './pipes/filtroproducto.pipe';
+import {DialogModule} from 'primeng/dialog';
 import {PanelModule} from 'primeng/panel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/calendar';
@@ -26,6 +33,7 @@ import { CardModule } from 'primeng/card';
     CategoriaComponent,
     ProductoComponent,
     AjusteComponent,
+    FiltroproductoPipe,
     CreateAjusteComponent
   ],
   imports: [
@@ -42,7 +50,16 @@ import { CardModule } from 'primeng/card';
     PickListModule,
     CheckboxModule,
     ConfirmDialogModule,
-    CardModule
+    CardModule,
+    ToastModule,
+    ToolbarModule,
+    ConfirmDialogModule,
+    DialogModule,
+
+   // 
+  TableModule,PanelModule,BrowserAnimationsModule,CardModule,DataViewModule,PaginatorModule,
+    //////////////,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
