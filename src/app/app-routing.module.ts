@@ -7,7 +7,7 @@ import { ProductoComponent } from './components/producto/producto.component';
 import { UpdateAjusteComponent } from './components/update-ajuste/update-ajuste.component';
 
 const routes: Routes = [
-  { path:'categorias',component:CategoriaComponent},
+  { path:'categorias',component: CategoriaComponent},
   { path:'productos',component:ProductoComponent},
   { path:'ajustes',component:AjusteComponent},
   { path:'ajustes/create',component:CreateAjusteComponent},

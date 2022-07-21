@@ -155,6 +155,7 @@ public actualizarCategoria2() {
   infoCategoria2(categoria:any){
     this.form.controls['cat_id'].disable()
     this.id_categoria=categoria.cat_id
+    this.form.controls['cat_id'].setValue(categoria.cat_id)
     this.form.controls['cat_nombre'].setValue(categoria.cat_nombre)
 
   }

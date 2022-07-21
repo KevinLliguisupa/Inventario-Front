@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="content-body">
+    <div class="row page-titles mx-0">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categorías</title>
-</head>
-
-<body>
-    <p-card>
-        <div class="heading_container heading_center" style="background-color: #4C4C6D; height: 150px;padding-top:2px;">
-            <h2 style="text-align: center; padding-top: 37px; color: white;font-style:italic;font-size: 55px;">
-                Categorías
-            </h2>
-        </div>
-    </p-card>
+        <p-card>
+            <div class="heading_container heading_center"
+                style="background-color: #4C4C6D; height: 150px;padding-top:2px;">
+                <h2 style="text-align: center; padding-top: 37px; color: white;font-style:italic;font-size: 55px;">
+                    Categorías
+                </h2>
+            </div>
+        </p-card>
+        <div><br></div>
     
     <!-- Modal nueva categoría -->
     <div class="modal fade" id="crearCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -76,66 +70,6 @@
 
                         </div>
                     </form>
-<div class="content-body">
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-            </ol>
-        </div>
-    </div>
-    
-<p-card>
-    <div class="heading_container" style=" background-color: #4C4C6D; height: 130px;">
-        <h2 style="text-align: center; padding-top: 30px; color: white;font-style:italic;font-size: 55px;">
-            Categorías
-        </h2>
-    </div>
-</p-card>
-
-<p-card>
-
-    <div class="card" style="border-color: black;width: 37%;">
-        <div class="card-header"
-            style="font-style:italic; background-color: #E8F6EF;font-weight: bolder;font-size: x-large;">
-            Agregar Categoría
-        </div>
-
-        <div class="card-body">
-
-            <!-- Button Create -->
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#crearCategoria"
-                style="background-color: #E8F6EF; color: black; font-weight: bolder;">
-                Nuevo
-            </button>
-
-            <!-- Modal nuevo producto -->
-            <div class="modal fade" id="crearCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Información de Categoría</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form [formGroup]="form">
-                                <div class="form-group">
-                                    <input type="text" name="cat_nombre" formControlName="cat_nombre"
-                                        placeholder="Nombre de la Categoría" class="form-control">
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary" (click)="crearCategoria()"
-                                        data-dismiss="modal">Crear</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -219,5 +153,4 @@
 
         <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
     </div>
-
 
