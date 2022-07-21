@@ -35,7 +35,7 @@ export class UpdateAjusteComponent implements OnInit {
       }
     )
     this.cargarProductos()
-      this.cargarInfoAjuste()
+    this.cargarInfoAjuste()
   }
 
   public cargarProductos() {

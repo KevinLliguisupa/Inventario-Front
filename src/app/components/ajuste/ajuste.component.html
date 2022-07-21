@@ -18,7 +18,7 @@
 
             </ng-template>
         </p-toolbar>
-        <p-table [value]="ajustes" dataKey="aju_numero" responsiveLayout="scroll">
+        <p-table [value]="ajustes" [rows]="8" [paginator]="true" dataKey="aju_numero" responsiveLayout="scroll">
             <ng-template pTemplate="caption">
                 <div class="flex align-items-center justify-content-between">
                     <h5 class="m-0">Administrar Ajustes</h5>
@@ -35,8 +35,6 @@
                     </th>
                     <th pSortableColumn="descipcion">Descipción</th>
                     <th pSortableColumn="estado">Estado</th>
-                    <!-- <th pSortableColumn="narticulos">Tot. Art.<p-sortIcon field="narticulos"></p-sortIcon>
-                        </th> -->
                     <th>Opciones</th>
                 </tr>
             </ng-template>
@@ -47,13 +45,12 @@
                             class="p-button-text p-button-rounded p-button-plain"
                             [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                     </td>
-                    <td><img [src]="'https://cdn-icons-png.flaticon.com/512/5145/5145985.png'" width="50"
+                    <td><img [src]="'../../../assets/images/ajuste.png'" width="50"
                             class="shadow-4" /></td>
                     <td>{{ajuste.aju_numero}}</td>
                     <td>{{ajuste.aju_fecha}}</td>
                     <td>{{ajuste.aju_descripcion}}</td>
                     <td>{{ajuste.aju_estado_etiqueta}}</td>
-                    <!-- <td>{{ajuste.aju_cantidad_ajuste}}</td> -->
                     <td>
 
                         <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info"

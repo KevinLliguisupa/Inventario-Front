@@ -56,9 +56,7 @@ export class AjusteComponent implements OnInit {
             let detalle = ajuste.aju_detalle[cont];
             for (let contp = 0; contp < producto.length; contp++) {
               const product = producto[contp];
-              //console.log(product)
               if (product.pro_id == detalle.pro_id) {
-                //detalle.pro_nombre = product.pro_nombre
                 detalle.producto=product
               }
             }

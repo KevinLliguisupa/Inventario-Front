@@ -41,8 +41,8 @@
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
                                         <Label style="padding-right: 10px;">Iva</Label>
-                                        <input type="checkbox" name="pro_iva"
-                                            formControlName="pro_iva" placeholder="IVA" >
+                                        <input type="checkbox" name="pro_iva" formControlName="pro_iva"
+                                            placeholder="IVA">
                                     </div>
                                 </div>
                             </div>
@@ -111,8 +111,8 @@
                                     <div class="form-inline">
                                         <div class="form-group mb-2">
                                             <Label style="padding-right: 10px;">Iva</Label>
-                                            <input type="checkbox" name="pro_iva"
-                                                formControlName="pro_iva" placeholder="IVA" >
+                                            <input type="checkbox" name="pro_iva" formControlName="pro_iva"
+                                                placeholder="IVA">
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@
                             <td>{{producto.pro_pvp}}</td>
                             <td>
 
-                                <img src="{{producto.pro_imagen}}" width="80" >
+                                <img src="{{producto.pro_imagen}}" width="80">
                             </td>
                             <td>
                                 {{producto.pro_stock}}
@@ -235,6 +235,9 @@
                                     data-target="#actualizarProducto" (click)="infoProducto2(producto)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                                     (click)="borrarProducto(producto.pro_id)"></button>
+                                <button pButton pRipple type="button" icon="pi pi-bookmark"
+                                    class="p-button-rounded p-button-secondary" 
+                                    [routerLink]="['/kardex/id/',producto.pro_id]"></button>
                             </td>
                         </tr>
                     </ng-template>
