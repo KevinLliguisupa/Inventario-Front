@@ -1,0 +1,134 @@
+<div class="content-body">
+    <div class="row page-titles mx-0">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="m-t-30 text-center">
+                        <h2>Creacion de ajuste</h2>
+                        <br>
+                    </div>
+
+                    <section>
+                        <div class="card">
+                            <div>
+                                <h3 class="m-t-30">Información del Ajuste</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <h4 class="box-title m-t-30" style="font-size: 25px;">Número: {{numAjuste}}</h4>
+
+                                    <div class="col-md-7">
+                                        <div class="form-group">
+                                            <h5 class="box-title m-t-20">Fecha:</h5>
+                                            <p-calendar [(ngModel)]="fecha" [showIcon]="true" inputId="icon">
+                                            </p-calendar>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+        
+                                        <div class="form-group">
+                                            <h5 class="box-title m-t-30">Descripción:</h5>
+                                            <div class="text-center">
+                                                <textarea pInputTextarea [(ngModel)]="descip" rows="4" cols="38" style="font-size: 18px;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="card">
+                            <div>
+                                <h3 class="m-t-30 ">Selección de productos</h3>
+                            </div>
+
+                            <div class="card-body">
+
+
+                                <p-table #dt [value]="productos" [rows]="8" [paginator]="true"
+                                    [globalFilterFields]="['nombre']" responsiveLayout="scroll"
+                                    [(selection)]="productosSelected" [rowHover]="true" dataKey="pro_nombre"
+                                    [showCurrentPageReport]="true">
+                                    <ng-template pTemplate="caption">
+                                        <div class="flex align-items-center justify-content-between">
+                                            <h5 class="m-0">Productos</h5>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th style="width: 3rem">
+                                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                            </th>
+                                            <th pSortableColumn="codigo">Codigo <p-sortIcon field="codigo"></p-sortIcon>
+                                            </th>
+                                            <th>Imagen</th>
+                                            <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="categoria">Categoria<p-sortIcon field="categoria">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="iva">IVA <p-sortIcon field="iva">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="cantidad">Cantidad Ajuste<p-sortIcon field="cantidad">
+                                                </p-sortIcon>
+                                            </th>
+
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-producto>
+                                        <tr>
+                                            <td>
+                                                <p-tableCheckbox [value]="producto"></p-tableCheckbox>
+                                            </td>
+                                            <td>{{producto.pro_id}}</td>
+                                            <td><img [src]='producto.pro_imagen' [alt]="producto.pro_nombre" height="65"
+                                                    class="shadow-4" /></td>
+                                            <td>{{producto.pro_nombre}}</td>
+                                            <td>{{producto.pro_categoria.cat_nombre}}</td>
+                                            <td>{{producto.pro_pvp}}</td>
+                                            <td>{{producto.pro_iva_etiqueta}}
+                                            </td>
+                                            <td>{{producto.pro_stock}} disp.</td>
+                                            <td>
+                                                <div>
+                                                    <p-inputNumber [(ngModel)]="producto.aju_det_cantidad"
+                                                        mode="decimal" [min]="-producto.pro_stock" [size]="3"
+                                                        [disabled]="!productosSelected.includes(producto)">
+                                                    </p-inputNumber>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="summary">
+                                        <div class="flex align-items-center justify-content-between">
+                                            Total de productos: {{productos ? productos.length : 0 }}
+                                        </div>
+                                    </ng-template>
+                                </p-table>
+
+                            </div>
+                        </div>
+                    </section>
+                    <div style="display: flex;">
+                        <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+                            class="p-button-rounded p-button-danger" (click)="cancelar()"></button>
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple icon="pi pi-save" type="button" label="Crear Ajuste"
+                                class="p-button-rounded p-button-success" (click)="crearAjuste()"></button>
+                            <button pButton pRipple icon="pi pi-file-pdf" type="button" label="Imprimir"
+                                class="p-button-rounded p-button-warning"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
