@@ -16,19 +16,6 @@ export class CategoriaService {
     return this.http.get(url)
   }
 
-<<<<<<< HEAD
-=======
-  // public getCategoriaById(pro_id:any){
-  //   const url = '/categorias/id/'+cat_id;
-  //   return this.http.get(url)
-  // }
-
-  // public getCategoriaByName(pro_nombre:any){
-  //   const url=this.apiUrl+`/categorias/nombre/`+cat_nombre;
-  //   return this.http.get(url)
-  // }
-
->>>>>>> e574fe72732a65266fb34a73fcaeb9a314ac6b49
   public postCreateCat(body:any){
     const url=this.apiUrl+`/categorias/`
     return this.http.post(url,body)
@@ -44,8 +31,4 @@ export class CategoriaService {
     return this.http.put(url,body)
 
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> e574fe72732a65266fb34a73fcaeb9a314ac6b49
 }

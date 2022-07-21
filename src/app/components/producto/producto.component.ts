@@ -5,10 +5,10 @@ import { CategoriaService } from 'src/app/service/categoria.service';
 import { ModelProducto } from 'src/app/model/producto.model';
 import { ModelCategoria } from 'src/app/model/categoria.model';
 
-import Swal from 'sweetalert2';
 ///
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
