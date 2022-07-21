@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductoService } from 'src/app/service/producto.service';
 import { CategoriaService } from 'src/app/service/categoria.service';
+import {StorageService} from 'src/app/service/storage.service'
 import { ModelProducto } from 'src/app/model/producto.model';
 import { ModelCategoria } from 'src/app/model/categoria.model';
+
 
 ///
 import { ConfirmationService } from 'primeng/api';
@@ -47,10 +49,13 @@ export class ProductoComponent implements OnInit {
     pro_imagen: "",
     //pro_stock: 0
   }
+ 
+  imagen_producto: string | undefined;
 
 
 
-  constructor(private productoService: ProductoService,private categoriaService:CategoriaService, private formBuilder: FormBuilder) { }
+  constructor(private productoService: ProductoService,private categoriaService:CategoriaService, private formBuilder: FormBuilder,
+     private storageService : StorageService) { }
 
   ngOnInit(): void {
     this.cargarProductos()
@@ -161,7 +166,7 @@ export class ProductoComponent implements OnInit {
       pro_iva: iva,
       pro_costo: this.form.value.pro_costo,
       pro_pvp: this.form.value.pro_pvp,
-      pro_imagen: this.form.value.pro_imagen
+      pro_imagen: this.imagen_producto
     }
     ).subscribe(respuesta => {
       console.log('Producto enviado');
@@ -273,7 +278,24 @@ export class ProductoComponent implements OnInit {
   }
  
 
-  
+  public cargaImagen(event: any){
+    let archivo = event.target.files
+    let reader = new FileReader();
+    let nombre = "img"
+    let fecha = Date.now()
+    console.log(archivo[0])
+
+    reader.readAsDataURL(archivo[0])
+    reader.onloadend =()=>{
+      this.storageService.subirImagen(nombre+""+fecha, reader.result).then(urlImagen=>{
+        console.log(urlImagen)
+        this.imagen_producto = String(urlImagen)
+      })
+    }
+
+    console.log(this.imagen_producto)
+ 
+  }
 
 
 }
