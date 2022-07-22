@@ -133,6 +133,7 @@
                                     </p-columnFilter>
                                 </div>
                             </th>
+                            <th>Estado</th>
                             <th>Opciones</th>
                         </tr>
                     </ng-template>
@@ -144,13 +145,18 @@
                             <td>
                                 {{categoria.cat_nombre}}
                             </td>
+                            <td>{{categoria.cat_estEti}}</td>
 
                             <td>
                                 <button pButton pRipple icon="pi pi-pencil"
                                     class="p-button-rounded p-button-success mr-2" data-toggle="modal"
-                                    data-target="#actualizarCategoria2" (click)="infoCategoria2(categoria)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                                    (click)="borrarCategoria(categoria.cat_id)"></button>
+                                    data-target="#actualizarCategoria2" (click)="infoCategoria2(categoria)" 
+                                    style="height: 2.5rem; width: 2.5rem;"></button>
+
+                                    <button pButton pRipple type="button" icon="pi pi-power-off"
+                                    class="p-button-rounded p-button-danger" style="height: 2.5rem; width: 2.5rem;"
+                                    (click)="cambiarEstado(categoria)"></button>
+
                             </td>
                         </tr>
 

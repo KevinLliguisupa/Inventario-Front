@@ -70,9 +70,9 @@ export class CategoriaComponent implements OnInit {
         for (let i = 0; i < categoria.length; i++) {
           const item = categoria[i];
           if (item.cat_estado) {
-            item.estEti="Activo"
+            item.cat_estEti="Activo"
           }else{
-            item.estEti="Inactivo"
+            item.cat_estEti="Inactivo"
           }
         }
         this.categorias=categoria

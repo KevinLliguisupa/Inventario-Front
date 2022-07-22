@@ -193,7 +193,7 @@ export class AjusteComponent implements OnInit {
         }
       },
       business: {
-        name: "Modulo Inventario"
+        name: "Módulo Inventario"
       },
       contact: {
         label: "Ajuste de producto",
@@ -220,13 +220,13 @@ export class AjusteComponent implements OnInit {
             }
           },
           {
-            title: "Categoria",
+            title: "Categoría",
             style: {
               width: 30
             }
           },
           {
-            title: "Descipcion",
+            title: "Descipción",
             style: {
               width: 75
             }
