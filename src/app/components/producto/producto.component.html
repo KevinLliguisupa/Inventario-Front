@@ -41,8 +41,8 @@
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
                                         <Label style="padding-right: 10px;">Iva</Label>
-                                        <input type="checkbox" name="pro_iva"
-                                            formControlName="pro_iva" placeholder="IVA" >
+                                        <input type="checkbox" name="pro_iva" formControlName="pro_iva"
+                                            placeholder="IVA">
                                     </div>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                                 <input type="number" name="pro_pvp" formControlName="pro_pvp"
                                     placeholder="Precio de venta" class="form-control" min="0" step="0.05">
                             </div>
-                            <div class="form-group">             
-                                    <input type="file" name="subirImagen" id="" (change)="cargaImagen($event)">
+                            <div class="form-group">
+                                <input type="file" name="subirImagen" id="" (change)="cargaImagen($event)">
                             </div>
 
 
@@ -86,46 +86,80 @@
                             <div class="form-group">
 
                                 <div class="form-group">
-                                    <input type="text" name="pro_id" formControlName="pro_id" class="form-control">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px; font-weight: bold;">Id: </Label>
+                                            <input type="text" name="pro_id" formControlName="pro_id"
+                                                class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <input type="text" name="pro_nombre" formControlName="pro_nombre"
-                                        class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" name="pro_descripcion" formControlName="pro_descripcion"
-                                        class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <select name="cat_nombre" formControlName="cat_nombre" class="form-control">
-                                        <option *ngFor="let categoria of categorias" value="{{categoria.cat_nombre}}">
-                                            {{categoria.cat_nombre}}</option>
-
-                                    </select>
-                                </div>
                                 <div class="form-group">
                                     <div class="form-inline">
                                         <div class="form-group mb-2">
-                                            <Label style="padding-right: 10px;">Iva</Label>
-                                            <input type="checkbox" name="pro_iva"
-                                                formControlName="pro_iva" placeholder="IVA" >
+                                            <Label style="padding-right: 10px; font-weight: bold;">Nombre: </Label>
+                                            <input type="text" name="pro_nombre" formControlName="pro_nombre"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px; font-weight: bold;">Descripción: </Label>
+                                            <input type="text" name="pro_descripcion" formControlName="pro_descripcion"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px; font-weight: bold;">Categoría: </Label>
+                                            <select name="cat_nombre" formControlName="cat_nombre" class="form-control">
+                                                <option *ngFor="let categoria of categorias"
+                                                    value="{{categoria.cat_nombre}}">
+                                                    {{categoria.cat_nombre}}</option>
+
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" name="pro_costo" formControlName="pro_costo"
-                                        class="form-control">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px;font-weight: bold;">Iva: </Label>
+                                            <input type="checkbox" name="pro_iva" formControlName="pro_iva"
+                                                placeholder="IVA">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" name="pro_pvp" formControlName="pro_pvp" class="form-control">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px;font-weight: bold;">Costo: $</Label>
+                                            <input type="number" name="pro_costo" formControlName="pro_costo"
+                                                class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">             
-                                    <input type="file" name="subirImagen" formControlName="pro_updateimagen" id="" (change)=" ActualizarImagen($event)">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px;font-weight: bold;">Precio: $</Label>
+                                            <input type="number" name="pro_pvp" formControlName="pro_pvp"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" name="subirImagen" formControlName="pro_updateimagen" id=""
+                                        (change)=" ActualizarImagen($event)">
 
-                                    <input type="text" name="pro_imagen" formControlName="pro_imagen" >
+                                    <input type="text" name="pro_imagen" formControlName="pro_imagen">
 
                                 </div>
 
@@ -165,14 +199,14 @@
 
                         </div>
                     </ng-template>
-<!-- export pdf -->
+                    <!-- export pdf -->
                     <ng-template pTemplate="caption">
                         <div class="flex">
                             <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
-                             class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
                         </div>
                     </ng-template>
-<!-- export pdf -->
+                    <!-- export pdf -->
                     <ng-template pTemplate="header">
                         <tr>
 
@@ -230,7 +264,7 @@
                             <td>{{producto.pro_pvp}}</td>
                             <td>
 
-                                <img src="{{producto.pro_imagen}}" width="80" >
+                                <img src="{{producto.pro_imagen}}" width="80">
                             </td>
                             <td>
                                 {{producto.pro_stock}}
