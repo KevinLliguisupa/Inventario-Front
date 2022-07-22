@@ -118,9 +118,17 @@ export class ProductoComponent implements OnInit {
 
 
   public cargarProductos() {
-    this.productoService.getProductos().subscribe(
+    this.productoService.getAllProductos().subscribe(
       (producto: any) => {
         this.productos = producto
+        for (let i = 0; i < producto.length; i++) {
+          const item = producto[i];
+          if (item.pro_estado) {
+            item.pro_estEti="Activo"
+          }else{
+            item.pro_estEti="Inactivo"
+          }
+        }
         console.log(this.productos)
       }, (error) => console.warn(error)
     )
@@ -130,7 +138,7 @@ export class ProductoComponent implements OnInit {
     this.categoriaService.getCategorias().subscribe(
       (categoria: any) => {
         this.categorias = categoria
-        console.log(this.categorias)
+        //console.log(this.categorias)
       }, (error) => console.warn(error)
     )
   }
@@ -302,7 +310,68 @@ export class ProductoComponent implements OnInit {
     })
   }
 
-  cambiarIva(valor: any): String {
+  public cambiarEstado(producto: ModelProducto) {
+    if (producto.pro_estado) {
+      Swal.fire({
+        title: '¿Está seguro de desactivar?',
+        text: "Esta acción ocultara este ítem de otros apartados del sistema",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#91C788',
+        cancelButtonColor: '#FFAAA7',
+        confirmButtonText: 'Si, deseo desactivarlo!',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.productoService.deleteProducto({
+            pro_id: producto.pro_id
+          }).subscribe(res => {
+            console.log('Producto desactivado correctamente.')
+            this.cargarProductos()
+          })
+
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambiado!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
+    } else {
+      Swal.fire({
+        title: '¿Está seguro de activar?',
+        text: "Esta acción mostrará este ítem de otros apartados del sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#91C788',
+        cancelButtonColor: '#FFAAA7',
+        confirmButtonText: 'Si, deseo activarlo!',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.productoService.activateProducto({
+            pro_id: producto.pro_id
+          }).subscribe(res => {
+            console.log('Producto activado correctamente.')
+            this.cargarProductos()
+          })
+
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambiado!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
+    }
+  }
+
+
+  cambiarIva(valor:any):String{
     let resp = ""
     if (valor == true) {
       resp = "SI"

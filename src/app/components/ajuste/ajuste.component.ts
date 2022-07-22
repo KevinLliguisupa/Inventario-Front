@@ -4,8 +4,8 @@ import { ModelAjuste } from 'src/app/model/ajuste.model';
 import { ProductoService } from 'src/app/service/producto.service';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable"
+import jsPDFInvoiceTemplate, { OutputType, jsPDF } from "jspdf-invoice-template";
+
 
 @Component({
   selector: 'app-ajuste',
@@ -15,9 +15,10 @@ import autoTable from "jspdf-autotable"
 export class AjusteComponent implements OnInit {
 
   ajustes: any[] = [];
+  //returns number of pages created
 
   constructor(private ajusteService: AjusteService,
-    private productoService: ProductoService, private location: Location) { }
+    private productoService: ProductoService, private location: Location,) { }
 
   ngOnInit(): void {
     this.cargarAjustes();
@@ -40,6 +41,7 @@ export class AjusteComponent implements OnInit {
           } else {
             ajuste[index].aju_estado_etiqueta = "Inactivo"
           }
+          ajuste[index].aju_modificable = ajuste[index].aju_detalle[0].aju_det_modificable
         }
         this.ajustes = ajuste
       }, (error) => console.log(error)
@@ -56,10 +58,8 @@ export class AjusteComponent implements OnInit {
             let detalle = ajuste.aju_detalle[cont];
             for (let contp = 0; contp < producto.length; contp++) {
               const product = producto[contp];
-              //console.log(product)
               if (product.pro_id == detalle.pro_id) {
-                //detalle.pro_nombre = product.pro_nombre
-                detalle.producto=product
+                detalle.producto = product
               }
             }
           }
@@ -84,7 +84,7 @@ export class AjusteComponent implements OnInit {
           this.ajusteService.deleteAjuste({
             aju_numero: ajuste.aju_numero
           }).subscribe(res => {
-            console.log('Producto desactivado correctamente.')
+            console.log('Ajuste desactivado correctamente.')
             this.cargarAjustes()
           })
 
@@ -101,7 +101,7 @@ export class AjusteComponent implements OnInit {
       Swal.fire({
         title: '¿Está seguro de activar?',
         text: "Esta acción mostrará este ítem de otros apartados del sistema",
-        icon: 'question',
+        icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#91C788',
         cancelButtonColor: '#FFAAA7',
@@ -112,7 +112,7 @@ export class AjusteComponent implements OnInit {
           this.ajusteService.activateAjuste({
             aju_numero: ajuste.aju_numero
           }).subscribe(res => {
-            console.log('Producto activado correctamente.')
+            console.log('Ajuste activado correctamente.')
             this.cargarAjustes()
           })
 
@@ -128,38 +128,128 @@ export class AjusteComponent implements OnInit {
     }
   }
 
-  public exportPdf(ajuste:any) {
+  public imprimir(ajuste: any) {
+    Swal.fire({
+      title: '¿Desea imprimir?',
+      text: "Al imprimir ya no podrá editar este ajuste nuevamente",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#91C788',
+      cancelButtonColor: '#FFAAA7',
+      confirmButtonText: 'Si, imprimirlo!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-    console.log(ajuste)
-    let body=[]
+        this.generatePdf(ajuste)
+        this.ajusteService.cambiarModificar({
+          aju_numero: ajuste.aju_numero
+        }).subscribe(res => {
+          this.cargarAjustes()
+        })
+
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Documento generado!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    })
+
+  }
+
+  public generatePdf(ajuste: any) {
+
+    let body = []
     for (let index = 0; index < ajuste.aju_detalle.length; index++) {
       const detalle = ajuste.aju_detalle[index];
       //Crea el contenido de la tabla (filas)
-      body.push({
-        proId:detalle.producto.pro_id,
-        proNom: detalle.producto.pro_nombre,
-        cantidad: detalle.aju_det_cantidad
-      })
-      }
-    
-    const doc = new jsPDF('p', 'pt');
 
-    autoTable(doc, {
-      //Cabeceras de la tabla
-      //dataKey debe coicidir con los atributos de body
-      columns: [
-        { title: "Id Producto", dataKey: "proId" },
-        { title: "Nombre Producto", dataKey: "proNom" },
-        { title: "Cantidad", dataKey: "cantidad" },
-      ],
+      body.push([
+        detalle.producto.pro_id + "\n",
+        detalle.producto.pro_nombre,
+        detalle.producto.pro_categoria.cat_nombre,
+        detalle.producto.pro_descripcion,
+        detalle.producto.pro_pvp,
+        detalle.aju_det_cantidad])
+    }
 
-      body: body,
-      didDrawPage: (dataArg) => {
-        doc.text('Detalle del ajuste', dataArg.settings.margin.left, 80);
-      }
-    });
-    doc.save(ajuste.aju_numero+'_report.pdf');
-
+    let props: any = {
+      outputType: OutputType.Save,
+      returnJsPDFDocObject: true,
+      fileName: ajuste.aju_numero,
+      orientationLandscape: false,
+      compress: true,
+      logo: {
+        src: "https://cdn-icons-png.flaticon.com/512/5164/5164023.png",
+        type: 'PNG',
+        width: 35,
+        height: 35,
+        margin: {
+          top: 0,
+          left: 0
+        }
+      },
+      business: {
+        name: "Modulo Inventario"
+      },
+      contact: {
+        label: "Ajuste de producto",
+        name: ajuste.aju_numero,
+        address: " ",
+        phone: "Concepto del ajuste:",
+        email: ajuste.aju_descripcion,
+        otherInfo: " ",
+      },
+      invoice: {
+        label: ' ',
+        num: ajuste.aju_fecha,
+        header: [
+          {
+            title: "Cod.",
+            style: {
+              width: 10
+            }
+          },
+          {
+            title: "Nom. Prod.",
+            style: {
+              width: 40
+            }
+          },
+          {
+            title: "Categoria",
+            style: {
+              width: 30
+            }
+          },
+          {
+            title: "Descipcion",
+            style: {
+              width: 75
+            }
+          },
+          { title: "Precio" },
+          { title: "Cantidad" }
+        ],
+        table: body,
+        additionalRows: [{
+          col1: 'Total productos modificados:',
+          col2: ajuste.aju_cantidad_ajuste.toString(),
+          style: {
+            fontSize: 14
+          }
+        }],
+      },
+      footer: {
+        text: "Documento creado únicamente con fines educativos.",
+      },
+      pageEnable: true,
+      pageLabel: "Page ",
+    }
+    jsPDFInvoiceTemplate(props);
 
   }
 

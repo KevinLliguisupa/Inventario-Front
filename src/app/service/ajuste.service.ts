@@ -8,7 +8,7 @@ export class AjusteService {
   @Output() disparador:EventEmitter<any> = new EventEmitter();
 
   apiUrl:string="https://api-modulo-inventario.herokuapp.com"
-  //apiUrl:string="http://localhost:4000"
+  // apiUrl:string="http://localhost:4000"
 
   constructor(private http:HttpClient) { }
 
@@ -53,6 +53,11 @@ export class AjusteService {
 
   public activateAjuste(body:any){
     const url=this.apiUrl+`/ajustes/activate/`
+    return this.http.put(url,body)
+  }
+
+  public cambiarModificar(body:any){
+    const url=this.apiUrl+`/ajustes/modificable/`
     return this.http.put(url,body)
   }
 }

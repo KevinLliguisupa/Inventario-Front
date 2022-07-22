@@ -240,6 +240,7 @@
                                         display="pro_categoria.cat_nombre"></p-columnFilter>
                                 </div>
                             </th>
+                            <th>Estado</th>
                             <th>Opciones</th>
                         </tr>
 
@@ -273,11 +274,20 @@
                                 {{producto.pro_categoria.cat_nombre}}
                             </td>
                             <td>
-                                <button pButton pRipple icon="pi pi-pencil"
-                                    class="p-button-rounded p-button-success mr-2" data-toggle="modal"
+                                {{producto.pro_estEti}}
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" style="height: 2.5rem; width: 2.5rem;"
+                                    class="p-button-rounded p-button-success mr-1" data-toggle="modal"
                                     data-target="#actualizarProducto" (click)="infoProducto2(producto)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                                    (click)="borrarProducto(producto.pro_id)"></button>
+
+                                <button pButton pRipple type="button" icon="pi pi-power-off"
+                                    class="p-button-rounded p-button-danger" style="height: 2.5rem; width: 2.5rem;"
+                                    (click)="cambiarEstado(producto)"></button>
+
+                                <button pButton pRipple type="button" icon="pi pi-chart-line"
+                                    style="height: 2.5rem; width: 2.5rem;" class="p-button-rounded p-button-secondary"
+                                    [routerLink]="['/kardex/id/',producto.pro_id]"></button>
                             </td>
                         </tr>
                     </ng-template>

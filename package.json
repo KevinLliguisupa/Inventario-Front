@@ -28,6 +28,8 @@
     "jquery-steps": "^1.1.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.25",
+    "jspdf-invoice-template": "^1.4.3",
+    "jspdf-invoice-template-nodejs": "^1.4.30",
     "primeicons": "^5.0.0",
     "primeng": "^14.0.0-rc.1",
     "rxjs": "~7.5.0",

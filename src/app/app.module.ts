@@ -34,6 +34,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from 'primeng/dropdown';
+import { KardexComponent } from './components/kardex/kardex.component';
 
 
 
@@ -47,7 +48,8 @@ import { DropdownModule } from 'primeng/dropdown';
     AjusteComponent,
     FiltroproductoPipe,
     CreateAjusteComponent,
-    UpdateAjusteComponent
+    UpdateAjusteComponent,
+    KardexComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,4 @@
-import { ModelCategoria } from "./categoria.model";
-
-export interface ModelProducto {
+export interface modelKardex{
     pro_id: number,
     pro_nombre: string,
     pro_descripcion: string,
@@ -9,7 +7,7 @@ export interface ModelProducto {
     pro_pvp: number,
     pro_imagen: string,
     pro_stock: number,
-    pro_categoria: ModelCategoria,
-    pro_estado:boolean,
+    pro_categoria: String,
     aju_det_cantidad:number
+    movimientos: []
 }
