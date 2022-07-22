@@ -1,145 +1,183 @@
 <div class="content-body">
     <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-            </ol>
-        </div>
-    </div>
-    
-<p-card>
-    <div class="heading_container" style=" background-color: #4C4C6D; height: 130px;">
-        <h2 style="text-align: center; padding-top: 30px; color: white;font-style:italic;font-size: 55px;">
-            Categorías
-        </h2>
-    </div>
-</p-card>
 
-<p-card>
+        <p-card>
+            <div class="heading_container heading_center"
+                style="background-color: #4C4C6D; height: 150px;padding-top:2px;">
+                <h2 style="text-align: center; padding-top: 37px; color: white;font-style:italic;font-size: 55px;">
+                    Categorías
+                </h2>
+            </div>
+        </p-card>
+        <div><br></div>
 
-    <div class="card" style="border-color: black;width: 37%;">
-        <div class="card-header"
-            style="font-style:italic; background-color: #E8F6EF;font-weight: bolder;font-size: x-large;">
-            Agregar Categoría
-        </div>
-
-        <div class="card-body">
-
-            <!-- Button Create -->
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#crearCategoria"
-                style="background-color: #E8F6EF; color: black; font-weight: bolder;">
-                Nuevo
-            </button>
-
-            <!-- Modal nuevo producto -->
-            <div class="modal fade" id="crearCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Información de Categoría</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form [formGroup]="form">
-                                <div class="form-group">
-                                    <input type="text" name="cat_nombre" formControlName="cat_nombre"
-                                        placeholder="Nombre de la Categoría" class="form-control">
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary" (click)="crearCategoria()"
-                                        data-dismiss="modal">Crear</button>
-                                </div>
-                            </form>
-                        </div>
+        <!-- Modal nueva categoría -->
+        <div class="modal fade" id="crearCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Información de Categoría</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="form">
+                            <div class="form-group">
+                                <input type="text" name="cat_nombre" formControlName="cat_nombre"
+                                    placeholder="Nombre de la categoría" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" (click)="crearCategoria()"
+                                    data-dismiss="modal">Crear</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="modal fade" id="actualizarCategoria2" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Categoría</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
-</p-card>
+                    <div class="modal-body">
+                        <form [formGroup]="form">
+                            <div class="form-group">
 
-<div class="col-md-12">
-    <table class="table table-bordered table-hover bg-white">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let categoria of categorias">
-
-                <td>
-                    {{categoria.cat_id}}
-                </td>
-                <td>
-                    {{categoria.cat_nombre}}
-                </td>
-
-                <td class="d-flex-justify-content-center">
-                    <a class="btn btn-primary" (click)="borrarCategoria(categoria.cat_id)">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a class="btn btn-success" data-toggle="modal" data-target="#actualizarCategoria"
-                        (click)='infoUpdateCategoria(categoria.cat_id, categoria.cat_nombre)'>
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <div class="modal fade" id="actualizarCategoria" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Editar categoria</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                                <div class="modal-body">
-                                    <form [formGroup]="form">
-                                        <div class="form-group">
-                                            <label>
-                                                <h6>Id Categoría: {{informacionCategoria.cat_id}}</h6>
-                                            </label>
-                                            <div class="form-group">
-                                                <input type="text" name="cat_nombre" formControlName="cat_nombre"
-                                                    placeholder="{{informacionCategoria.cat_nombre}}"
-                                                    class="form-control" value="{{informacionCategoria.cat_nombre}}">
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Cerrar</button>
-                                                <button type="button" class="btn btn-primary"
-                                                    (click)="actualizarCategoria(informacionCategoria.cat_id)"
-                                                    data-dismiss="modal">Actualizar</button>
-                                            </div>
-
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px;font-weight: bold;">Id: </Label>
+                                            <input type="text" name="cat_id" formControlName="cat_id"
+                                                class="form-control">
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <Label style="padding-right: 10px;font-weight: bold;">Nombre: </Label>
+                                            <input type="text" name="cat_nombre" formControlName="cat_nombre"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" (click)="actualizarCategoria2()"
+                                        data-dismiss="modal">Actualizar</button>
+                                </div>
 
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </td>
-
-            </tr>
-            <div class="flex align-items-center justify-content-between">
-                En total hay {{categorias ? categorias.length : 0 }} categorías.
+                </div>
             </div>
-        </tbody>
-    </table>
+        </div>
 
-</div>
-</div>
+
+        <div class="content-section implementation">
+            <p-toast></p-toast>
+
+            <div class="card">
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" 
+                            data-toggle="modal" data-target="#crearCategoria" (click)="crearCategoria()"></button>
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [rows]="5" [value]="categorias" [paginator]="true" responsiveLayout="scroll"
+                    [rowHover]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" [globalFilterFields]="['cat_nombre']">
+                    <ng-template pTemplate="caption">
+                        <div class="flex align-items-center justify-content-between">
+                            <h5 class="m-0">Administrar Categorías</h5>
+
+                        </div>
+                    </ng-template>
+
+                    <!-- export pdf -->
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" label="Reporte"
+                                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                        </div>
+                    </ng-template>
+                    <!-- Modal nuevo producto -->
+
+                    <ng-template pTemplate="header">
+                        <tr>
+
+                            <th pSortableColumn="cat_id">Id<p-sortIcon field="cat_id"></p-sortIcon>
+                                <div class="flex justify-content-center align-items-center">
+                                    <p-columnFilter type="text" field="cat_id" display="cat_id"></p-columnFilter>
+                                </div>
+
+                            </th>
+                            <th pSortableColumn="cat_nombre">Nombre<p-sortIcon field="cat_nombre"></p-sortIcon>
+                                <div class="flex justify-content-center align-items-center">
+                                    <p-columnFilter type="text" field="cat_nombre" display="cat_nombre">
+                                    </p-columnFilter>
+                                </div>
+                            </th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-categoria>
+                        <tr>
+
+                            <td>{{categoria.cat_id}}</td>
+                            <td>
+                                {{categoria.cat_nombre}}
+                            </td>
+                            <td>{{categoria.cat_estEti}}</td>
+
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2" data-toggle="modal"
+                                    data-target="#actualizarCategoria2" (click)="infoCategoria2(categoria)" 
+                                    style="height: 2.5rem; width: 2.5rem;"></button>
+
+                                    <button pButton pRipple type="button" icon="pi pi-power-off"
+                                    class="p-button-rounded p-button-danger" style="height: 2.5rem; width: 2.5rem;"
+                                    (click)="cambiarEstado(categoria)"></button>
+
+                            </td>
+                        </tr>
+
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="flex align-items-center justify-content-between">
+
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [style]="{width: '450px'}" header="Detalles de categoría" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <div class="field">
+                        <label for="name">Nombre</label>
+                        <input type="text" pInputText id="cat_nombre" required autofocus />
+                        <small class="p-error">Ingrese un nombre.</small>
+                    </div>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+        </div>

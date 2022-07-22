@@ -1,0 +1,88 @@
+<div class="content-body">
+    <div class="row page-titles mx-0">
+
+        <p-card>
+            <div class="heading_container heading_center"
+                style="background-color: #4C4C6D; height: 150px;padding-top:2px;">
+                <h2 style="text-align: center; padding-top: 37px; color: white;font-style:italic;font-size: 55px;">
+                    Kardex
+                </h2>
+            </div>
+        </p-card>
+        <div><br></div>
+
+        <p-toolbar styleClass="mb-4">
+            <ng-template pTemplate="right">
+                <button pButton pRipple type="button" icon="pi pi-file-pdf" class="p-button-rounded p-button-warning"
+                    label="Reporte" (click)="imprimir()"></button>
+
+            </ng-template>
+        </p-toolbar>
+        <p-table [value]="kardex" dataKey="pro_id" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+                    <h5 class="m-0">Movimientos del producto</h5>
+
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Código</th>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Categoría </th>
+                    <th>Precio</th>
+                    <th>Stock </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-producto let-expanded="expanded">
+                <tr>
+
+                    <td>{{producto.pro_id}}</td>
+                    <td><img [src]="producto.pro_imagen" [alt]="producto.pro_nombre" width="130px"></td>
+                    <td>{{producto.pro_nombre}}</td>
+                    <td>{{producto.pro_categoria}}</td>
+                    <td>{{producto.pro_pvp}} $</td>
+                    <td>{{producto.pro_stock}}</td>
+
+                </tr>
+            </ng-template>
+        </p-table>
+
+               
+                    <td colspan="7">
+                        <div class="p-3">
+                            <p-table [value]="movimientos" dataKey="id" [rows]="8" [paginator]="true">
+                                <ng-template pTemplate="header">
+                <tr>
+                    <th>Tipo</th>
+                    <th>Documento</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Stock</th>
+                    <th style="width: 4rem"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-movimiento>
+                <tr>
+                    <td><img [src]="movimiento.imagen" width="60" class="shadow-4" /></td>
+                    <td>{{movimiento.id}}</td>
+                    <td>{{movimiento.fecha}}</td>
+                    <td>{{movimiento.descipcion}}</td>
+                    <td>{{movimiento.cantidad}}</td>
+                    <td>{{movimiento.stock}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">Este ajuste no ha modificado ningun producto</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    </td>
+ 
+
+
+</div>

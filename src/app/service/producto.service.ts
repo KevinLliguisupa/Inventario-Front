@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +9,10 @@ export class ProductoService {
 
   apiUrl:string="https://api-modulo-inventario.herokuapp.com"
   // apiUrl:string="http://localhost:4000"
+<<<<<<< HEAD
   
+=======
+>>>>>>> master
 
   constructor(private http:HttpClient) { }
   
@@ -23,7 +27,7 @@ export class ProductoService {
   }
 
   public getProductosByName(pro_nombre:any){
-    const url=this.apiUrl+`/productos/nombre/`+pro_nombre
+    const url=this.apiUrl+`/productos/nombre/`+pro_nombre;
     return this.http.get(url)
   }
 
@@ -42,5 +46,14 @@ export class ProductoService {
     return this.http.put(url,body)
   }
 
+  public getAllProductos(){
+    const url=this.apiUrl+`/allproductos`
+    return this.http.get(url)
+  }
+
+  public activateProducto(body:any){
+    const url=this.apiUrl+`/productos/activate/`
+    return this.http.put(url,body)
+  }
 
 }
