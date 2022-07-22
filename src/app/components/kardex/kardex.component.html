@@ -11,6 +11,13 @@
         </p-card>
         <div><br></div>
 
+        <p-toolbar styleClass="mb-4">
+            <ng-template pTemplate="right">
+                <button pButton pRipple type="button" icon="pi pi-file-pdf" class="p-button-rounded p-button-warning"
+                    label="Reporte" (click)="imprimir()"></button>
+
+            </ng-template>
+        </p-toolbar>
         <p-table [value]="kardex" dataKey="pro_id" responsiveLayout="scroll">
             <ng-template pTemplate="caption">
                 <div class="flex align-items-center justify-content-between">
@@ -20,8 +27,6 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-       
-
                     <th>Código</th>
                     <th>Imagen</th>
                     <th>Nombre</th>

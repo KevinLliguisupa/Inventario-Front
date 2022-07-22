@@ -94,7 +94,7 @@
             <div class="card">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
-                        <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2"
+                        <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" 
                             data-toggle="modal" data-target="#crearCategoria" (click)="crearCategoria()"></button>
                     </ng-template>
                 </p-toolbar>
@@ -112,7 +112,7 @@
                     <!-- export pdf -->
                     <ng-template pTemplate="caption">
                         <div class="flex">
-                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" label="Reporte"
                                 class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
                         </div>
                     </ng-template>
