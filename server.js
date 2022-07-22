@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static('./dist/Inventario-Front'));
 
 app.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/angular-heroku/'}),
+    res.sendFile('index.html', {root: 'dist/Inventario-Front/'}),
 );
 
 // Start the app by listening on the default Heroku port

@@ -9,10 +9,6 @@ export class ProductoService {
 
   apiUrl:string="https://api-modulo-inventario.herokuapp.com"
   // apiUrl:string="http://localhost:4000"
-<<<<<<< HEAD
-  
-=======
->>>>>>> master
 
   constructor(private http:HttpClient) { }
   
