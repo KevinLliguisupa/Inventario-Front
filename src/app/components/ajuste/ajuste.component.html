@@ -53,12 +53,13 @@
                     <td>{{ajuste.aju_estado_etiqueta}}</td>
                     <td>
 
-                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info"
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info mr-1"
                             [routerLink]="['/ajustes/update/',ajuste.aju_numero]"
-                            style="height: 2.5rem; width: 2.5rem;"></button>
+                            style="height: 2.5rem; width: 2.5rem;" [disabled]="!ajuste.aju_modificable"></button>
+
                         <button pButton pRipple type="button" icon="pi pi-print"
-                            class="p-button-rounded p-button-warning" style="height: 2.5rem; width: 2.5rem;"
-                            (click)="exportPdf(ajuste)"></button>
+                            class="p-button-rounded p-button-warning mr-1" style="height: 2.5rem; width: 2.5rem;"
+                            (click)="imprimir(ajuste)"></button>
 
                         <button pButton pRipple type="button" icon="pi pi-power-off"
                             class="p-button-rounded p-button-danger" style="height: 2.5rem; width: 2.5rem;"

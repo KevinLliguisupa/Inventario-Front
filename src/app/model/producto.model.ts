@@ -10,6 +10,6 @@ export interface ModelProducto {
     pro_imagen: string,
     pro_stock: number,
     pro_categoria: ModelCategoria,
-
+    pro_estado:boolean,
     aju_det_cantidad:number
 }

@@ -32,8 +32,16 @@ export class CategoriaComponent implements OnInit {
   }
 
   public cargarCategorias(){
-    this.categoriaService.getCategorias().subscribe(
+    this.categoriaService.getAllCategorias().subscribe(
       (categoria:any)=>{
+        for (let i = 0; i < categoria.length; i++) {
+          const item = categoria[i];
+          if (item.cat_estado) {
+            item.estEti="Activo"
+          }else{
+            item.estEti="Inactivo"
+          }
+        }
         this.categorias=categoria
         console.log(this.categorias)
       },
@@ -101,6 +109,66 @@ export class CategoriaComponent implements OnInit {
     })
   }
 
+
+  public cambiarEstado(categoria: ModelCategoria) {
+    if (categoria.cat_estado) {
+      Swal.fire({
+        title: '¿Está seguro de desactivar?',
+        text: "Esta acción ocultara este ítem de otros apartados del sistema",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#91C788',
+        cancelButtonColor: '#FFAAA7',
+        confirmButtonText: 'Si, deseo desactivarlo!',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.categoriaService.deleteCat({
+            cat_id: categoria.cat_id
+          }).subscribe(res => {
+            console.log('Categoria desactivada correctamente.')
+            this.cargarCategorias()
+          })
+
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambiado!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
+    } else {
+      Swal.fire({
+        title: '¿Está seguro de activar?',
+        text: "Esta acción mostrará este ítem de otros apartados del sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#91C788',
+        cancelButtonColor: '#FFAAA7',
+        confirmButtonText: 'Si, deseo activarlo!',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.categoriaService.activateCat({
+            cat_id: categoria.cat_id
+          }).subscribe(res => {
+            console.log('Categoria activada correctamente.')
+            this.cargarCategorias()
+          })
+
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambiado!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
+    }
+  }
 
 
   public infoUpdateCategoria(cat_id: any, cat_nombre: any) {

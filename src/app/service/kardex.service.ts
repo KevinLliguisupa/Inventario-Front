@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 })
 export class kardexService {
 
-    apiUrl: string = "http://localhost:4000"
+    apiUrl:string="https://api-modulo-inventario.herokuapp.com"
 
     constructor(private http: HttpClient) { }
 

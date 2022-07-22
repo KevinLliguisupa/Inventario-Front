@@ -41,9 +41,14 @@ export class ProductoService {
     return this.http.put(url,body)
   }
 
-
   public getAllProductos(){
     const url=this.apiUrl+`/allproductos`
     return this.http.get(url)
   }
+
+  public activateProducto(body:any){
+    const url=this.apiUrl+`/productos/activate/`
+    return this.http.put(url,body)
+  }
+
 }
