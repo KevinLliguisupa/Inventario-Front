@@ -7,6 +7,11 @@ import Swal from 'sweetalert2';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 
+import jsPDF from 'jspdf';
+
+import * as FileSaver from 'file-saver';
+import autoTable from 'jspdf-autotable'; 
+
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
@@ -30,6 +35,10 @@ export class CategoriaComponent implements OnInit {
   
   id_categoria: any
   searchTerm: string =''
+
+  cols: any[] = [];
+
+  exportColumns: any[] = [];
  
   public informacionCategoria={
     cat_id:-1,
@@ -44,6 +53,14 @@ export class CategoriaComponent implements OnInit {
       cat_id:[''],
       cat_nombre:['']
     })
+
+    this.cols = [
+      { field: 'cat_id', header: 'Id', customExportHeader: 'CategoríaId' },
+      { field: 'cat_nombre', header: 'Nombre' }
+    ];
+
+    this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }
+    ))
     
   }
 
@@ -159,5 +176,18 @@ public actualizarCategoria2() {
     this.form.controls['cat_nombre'].setValue(categoria.cat_nombre)
 
   }
+
+  exportPdf() {
+
+    import("jspdf").then(jsPDF => {
+     import("jspdf-autotable").then(x => {
+         const doc = new jsPDF.default();
+         (doc as any).autoTable(this.exportColumns,this.categorias)
+         doc.save('categorias.pdf');
+     })
+ })
+   
+ }
+
 
 }
